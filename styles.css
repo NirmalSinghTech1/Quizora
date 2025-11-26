@@ -211,19 +211,41 @@ input[type="submit"] {
 
 ol {
     list-style-type: none;
-    width: 300px;
+    width: 400px;
     margin-right: auto;
+    margin-left: auto;
     border-radius: 10px;
     padding: 2em;
-    background-color: #1779ba40;
+    /* background-color: #1779ba40; */
     text-align: left;
-    margin-left: auto;
     box-shadow: 0 0 10px #1779ba;
+    transition: all 0.5s ease;
+    min-height: 200px;
+}
+
+ol .no-user-message {
+    text-align: center;
+    font-size: 1.4rem;
+    color: gray;
 }
 
 ol li {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     margin-bottom: .3em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+ol li .delete-user-button {
+    margin-left: auto;
+    cursor: pointer;
+    transition: fill 0.4s ease;
+}
+
+ol li .delete-user-button:hover {
+    fill: #bf0a30;
 }
 
 .leaderboard-container .go-home-button {
@@ -234,4 +256,10 @@ ol li {
 
 .leaderboard-container .go-home-button:hover {
     background-color: #b39ddb;
+}
+
+@media (min-width: 726px) {
+    ol {
+        width: 600px;
+    }
 }

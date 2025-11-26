@@ -27,7 +27,7 @@ body {
     background: -webkit-linear-gradient(to top, #1D2671, #C33764);  
     background: linear-gradient(154deg, #1D2671, #C33764);  */
     color: #E0E0E0;
-    height: 100vh;
+    min-height: 100vh;
     max-width: 100vw;
 }
 
@@ -36,7 +36,7 @@ main {
     align-items: center;
     justify-content: center; */
     padding: 2em 1.4em;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 /* ==========
@@ -46,6 +46,7 @@ QUIZ PAGE
 
 /* Quiz Container */
 main .quiz-container {
+    width: 100%;
     height: 100%;
 }
 
@@ -86,17 +87,17 @@ main .quiz-container {
     justify-content: space-between;
 }
 
-.timer .timeout-progress {
+.timer .countdown-progress {
     background-color: var(--light-gray);
     height: .4em;
     border-radius: 10px;
     width: 100%;
 }
 
-.timer .timeout-progress-bar {
+.timer .countdown-progress-bar {
     height: 100%;
     background-color: aqua;
-    width: 40%;
+    /* width: 40%; */
     border-radius: inherit;
     box-shadow: 0 0 7px aqua;
     transition: width 0.4s ease;
@@ -117,7 +118,7 @@ main .quiz-container {
     list-style-type: none;
 }
 
-.questions-container .options-list h2{
+.questions-container h2{
     margin-top: 0;
     font-size: 1.3rem;
     margin-bottom: 1.4em;
@@ -132,7 +133,12 @@ main .quiz-container {
     border-radius: 20px;
     border: 1px solid gray;
     cursor: pointer;
+    overflow-x: auto;
     transition: transform 0.4s ease;
+}
+
+.options-list li:hover {
+    transform: scale(1.01);
 }
 
 .options-list li:active {
@@ -157,10 +163,11 @@ li.incorrect {
 
 .explanation-and-button .explanation {
     font-size: .88rem;
-    /* background-color: #1A1A1A30; */
     background-color: #D3D3D310;
     padding: 1em;
     border-radius: 10px;
+    transition: opacity 2s ease;
+    opacity: 0;
 }
 
 /* Next Button */
@@ -174,15 +181,24 @@ li.incorrect {
     cursor: pointer;
     border-radius: 15px;
     transition: transform 0.4s ease;
+    outline: none;
+    border: none;
 }
 
-.next-button:hover {
-    transform: translateY(-2px);
+.next-button:hover, .next-button:focus:hover {
     background-color: #191919;
+    transform: translateY(-2px);
     outline: 1px solid gainsboro;
 }
 
 .next-button:active {
     transform: translateY(0px);
     opacity: 0.9;
+}
+
+@media (min-width: 1024px) {
+    main .quiz-container {
+        width: 70%;
+        margin: auto;
+    }
 }

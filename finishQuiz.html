@@ -13,7 +13,7 @@
         <div class="finish-quiz-container">
             <div class="finish-quiz-header">
                 <p>Total Score: </p>
-                <p class="score">400</p>
+                <p class="score">0</p>
                 <p>Enter your name below to save your score!</p>
             </div>
             <div class="form-container">
@@ -29,6 +29,30 @@
             </div>
         </div>
     </main>
-    <script src="./script.js"></script>
+    <script>
+        const getScore = JSON.parse(sessionStorage.getItem('score')) || 0
+        const scoreEl = document.querySelector('.score')
+        const userNameForm = document.querySelector('.user-name-form')
+        const username = document.querySelector('input[type=text]')
+        scoreEl.innerText = getScore
+
+        let users = JSON.parse(sessionStorage.getItem('users')) || []
+        // console.log("user", user)
+        userNameForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            let user = {
+                    username: username.value,
+                    score: getScore
+                }
+
+            console.log("users",users)
+            users.push(user)
+            sessionStorage.setItem('users', JSON.stringify(users))
+
+            userNameForm.reset()
+            window.location.assign('leaderboard.html')
+        })
+    </script>
 </body>
 </html>
