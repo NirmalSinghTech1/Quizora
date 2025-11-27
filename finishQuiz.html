@@ -16,37 +16,43 @@
                 <p class="score">0</p>
                 <p>Enter your name below to save your score!</p>
             </div>
+
+            <!-- user name form section -->
             <div class="form-container">
                 <form action="" class="user-name-form">
-                    <input type="text" placeholder="Enter your name" required autocomplete="off">
-                    <input type="submit" value="Save" class="save-button">
+                    <input type="text" placeholder="Enter your name" required autocomplete="off" aria-required="true">
+                    <input type="submit" value="Save" class="save-button" role="button">
                 </form>
-                <a href="./quiz.html" class="play-again-button">Play again</a>
-                <a href="/" class="go-home-button">
+                <a href="./quiz.html" class="play-again-button" role="button">Play again</a>
+                <!-- Go Home button -->
+                <a href="/" class="go-home-button" role="button">
                     Go Home
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3a6073"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
                 </a>
             </div>
         </div>
     </main>
+
+    <!-- In-page JavaScript script -->
     <script>
-        const getScore = JSON.parse(sessionStorage.getItem('score')) || 0
+        // DOM Elements
         const scoreEl = document.querySelector('.score')
         const userNameForm = document.querySelector('.user-name-form')
         const username = document.querySelector('input[type=text]')
+
+        // Get score from session storage
+        const getScore = JSON.parse(sessionStorage.getItem('score')) || 0
         scoreEl.innerText = getScore
 
         let users = JSON.parse(sessionStorage.getItem('users')) || []
-        // console.log("user", user)
+
+        // Storing user name to session storage
         userNameForm.addEventListener('submit', (e) => {
             e.preventDefault()
-
             let user = {
                     username: username.value,
                     score: getScore
                 }
-
-            console.log("users",users)
             users.push(user)
             sessionStorage.setItem('users', JSON.stringify(users))
 

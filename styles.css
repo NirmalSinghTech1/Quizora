@@ -13,14 +13,6 @@
 body {
     font-family: "Nova Square", Arial, Helvetica, sans-serif;
     background-color: #1A1A1A;
-    /* background: #C33764; 
-    background: -webkit-linear-gradient(to top, #1D2671, #C33764);  
-    background: linear-gradient(154deg, #1D2671, #C33764);  */
-    /* background: hsla(280, 47%, 43%, 1);
-    background: linear-gradient(120deg, hsla(280, 47%, 43%, 1) 0%, hsla(248, 76%, 13%, 1) 100%, hsla(265, 63%, 5%, 1) 100%);
-    background: -moz-linear-gradient(120deg, hsla(280, 47%, 43%, 1) 0%, hsla(248, 76%, 13%, 1) 100%, hsla(265, 63%, 5%, 1) 100%);
-    background: -webkit-linear-gradient(120deg, hsla(280, 47%, 43%, 1) 0%, hsla(248, 76%, 13%, 1) 100%, hsla(265, 63%, 5%, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#7F3AA1", endColorstr="#0F083B", GradientType=1 ); */
     color: #E0E0E0;
     height: 100vh;
     max-width: 100vw;
@@ -45,7 +37,6 @@ button, a, input[type="submit"] {
     cursor: pointer;
     display: inline-block;
     font-family: inherit;
-    /* font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; */
     font-size: 1.3rem;
     font-weight: 600;
     line-height: normal;
@@ -70,8 +61,6 @@ button:disabled, input[type="submit"]:disabled {
 button:hover, a:hover, input[type="submit"]:hover {
     color: #fff;
     background-color: #1A1A1A;
-    /* box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px; */
-    /* box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px; */
     transform: translateY(-2px);
 }
 
@@ -101,6 +90,7 @@ button:active, a:active, input[type="submit"]:active {
 
 .play-button {
     background-color:#5bc0de;
+    background-color: #bbadff;
 }
 
 .play-button:hover {
@@ -109,6 +99,7 @@ button:active, a:active, input[type="submit"]:active {
 
 .high-scores-button {
     background-color: #1779ba;
+    background-color: #dab6fc;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -132,6 +123,7 @@ button:active, a:active, input[type="submit"]:active {
   FINISH QUIZ CONTAINER
   =====================
 */
+
 .finish-quiz-container {
     padding: 0 1em;
     display: flex;
@@ -154,6 +146,7 @@ button:active, a:active, input[type="submit"]:active {
     font-size: 1.5rem;
 }
 
+/* Input field Style */
 input[type="text"] {
     font-family: inherit;
     border: none;
@@ -165,10 +158,12 @@ input[type="text"] {
     margin-bottom: 1em;
 }
 
+/* Submit button */
 input[type="submit"] {
     background-color: #cd8de5;
 }
 
+/* Go home button */
 .go-home-button {
     display: block;
     margin-left: auto;
@@ -180,6 +175,7 @@ input[type="submit"] {
     background-color: #dfc0eb;
 }
 
+/* Play again button */
 .play-again-button {
     margin-block: 0.3em;
     background-color: #d5a6e6;
@@ -199,7 +195,6 @@ input[type="submit"] {
 */
 
 .leaderboard-container {
-    /* background-color: red; */
     width: 100%;
     text-align: center;
 }
@@ -216,19 +211,20 @@ ol {
     margin-left: auto;
     border-radius: 10px;
     padding: 2em;
-    /* background-color: #1779ba40; */
     text-align: left;
     box-shadow: 0 0 10px #1779ba;
     transition: all 0.5s ease;
     min-height: 200px;
 }
 
+/* No user data message */
 ol .no-user-message {
     text-align: center;
     font-size: 1.4rem;
     color: gray;
 }
 
+/* Users data list */
 ol li {
     font-size: 1.8rem;
     margin-bottom: .3em;
@@ -238,6 +234,7 @@ ol li {
     transition: all 0.5s ease;
 }
 
+/* Delete user button */
 ol li .delete-user-button {
     margin-left: auto;
     cursor: pointer;
@@ -258,6 +255,7 @@ ol li .delete-user-button:hover {
     background-color: #b39ddb;
 }
 
+/* Media Query */
 @media (min-width: 726px) {
     ol {
         width: 600px;

@@ -13,22 +13,27 @@
        <div class="leaderboard-container">
             <h1>Leaderboard</h1>
             <ol class="leaderboard-userlist">
-                <!-- <li>Person 1: 400</li>
-                <li>Person 2: 400</li> -->
+                <!-- Users data here render using JavaScript -->
             </ol>
-            <a href="/" class="go-home-button">
+
+            <!-- Go Home Button -->
+            <a href="/" class="go-home-button" role="button">
                 Go Home
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3a6073"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
             </a>
         </div>
     </main>
+
+    <!-- In-page JavaScript script -->
     <script>
+        const usersList = document.querySelector('.leaderboard-userlist')
+
+        // Getting username, score from session storage
         const username = JSON.parse(sessionStorage.getItem('username'))
         const score = JSON.parse(sessionStorage.getItem('score'))
-        const usersList = document.querySelector('.leaderboard-userlist')
         const usersData = JSON.parse(sessionStorage.getItem('users'))
-        console.log(usersData)
 
+        // Rendering username and score on leaderboard
         usersData.forEach( (user, index) => {
             const li = document.createElement('li')
             li.innerHTML =  `${user.username}: ${user.score}
@@ -37,10 +42,12 @@
             usersList.appendChild(li)
         })
 
+        // Check if no userdata available, then display message
         if(usersData.length <= 0){
             usersList.innerHTML = `<li class="no-user-message">No Userdata available</li>`
         }
 
+        // Handle user data delete functionality
         function handleUserDelete(user){
             user.parentElement.remove()
             usersData.splice(user.dataset.delete, 1)
@@ -48,14 +55,14 @@
 
             if(usersData.length <= 0){
             usersList.innerHTML = `<li class="no-user-message">No Userdata available</li>`
-        }
+            }
         }
 
+        // Add click event to Delete button 
         const deleteUser = document.querySelector('.delete-user-button')
         document.addEventListener('click', (e) => {
             e.target.dataset.delete && handleUserDelete(e.target)
         })
-        
     </script>
 </body>
 </html>

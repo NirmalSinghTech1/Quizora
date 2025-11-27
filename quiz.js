@@ -9,41 +9,38 @@ const question = document.querySelector('.question')
 const explanation = document.querySelector('.explanation')
 const nextButton = document.querySelector('.next-button')
 
+// Document click event to check which option user select
 document.addEventListener('click', (e) => {
     e.target.dataset.option && checkOption(e.target)
 })
 
+// Handle next question
 nextButton.addEventListener('click', () => {
     nextQuestion()
 })
 
+// Global variables
 const quizData = JSON.parse(sessionStorage.getItem('data')) || []
-let currentIndex = 8
+let currentIndex = 0
 let score = 0
 let timerId
 
-console.log(quizData)
+// Renders quiz on the screen
 function renderQuiz(index) {
     if(quizData.length > 0 || quizData !== null) {
-        console.log('length', quizData.length)
         let totalQuestions = quizData.length
     
         currentQuestion.innerText = `Question ${index + 1} of ${totalQuestions}`
         progressBar.style.width = `${(index + 1) / totalQuestions * 100}%`
-        // console.log(progressBar)
-        // handleCountdown()
-        // explanation.innerText = quizData[index].explanation
-
-        // console.log(quizData[index].explanation)
+        handleCountdown()
         renderOptions(quizData[index])
-        
         correctAnswer(quizData[index])
     }
 }
 renderQuiz(currentIndex)
 
 
-// Handle countdown timer
+// starts a countdown timer for 30 seconds for each question
 function handleCountdown() {
     let totalTime = 30;
 
@@ -51,6 +48,7 @@ function handleCountdown() {
         clearInterval(timerId)
     }
     
+    // updating UI of progress bar and countdown every second
     timerId = setInterval(() => {
         console.log("timer", timerId)
         timeleft.innerText = totalTime
@@ -59,18 +57,17 @@ function handleCountdown() {
             clearInterval(timerId)
             nextQuestion()
         }
-        // console.log(totalTime)
         totalTime--;
     }, 1000);
     
 }
 
+// Render available options for the user to select on the screen
 function renderOptions(data) {
     const availableOptions = data.answers
-    
     question.innerText = data.question
+
     optionsList.innerText = ''
-    // console.log(availableOptions)
     for(let [key, value] of Object.entries(availableOptions)) {
         if(value !== null) {
             const li = document.createElement('li')
@@ -81,9 +78,9 @@ function renderOptions(data) {
     }
 }
 
+// Get which option is correct from API data stored in session storage
 function correctAnswer(data) {
     const correctAnswer = data.correct_answers
-    // console.log("data", data)
     for(let [key, value] of Object.entries(correctAnswer)) {
         if(value === 'true') {
             return key.substring(0, 8)
@@ -91,6 +88,7 @@ function correctAnswer(data) {
     }
 }
 
+// Checks whether the selected option is correct
 let throttleTimeout = null
 function checkOption(selectedOption) {
     if(throttleTimeout !== null) return;
@@ -98,16 +96,20 @@ function checkOption(selectedOption) {
     nextButton.disabled = false
 
     if(throttleTimeout === null){
+        // Increases score to 10 if the selected option is correct
         if(selectedOption.dataset.option === correctOption){
             selectedOption.classList.add('correct')
             score += 10
         } else {
             selectedOption.classList.add('incorrect')
         }
+
+        // Updating score UI and display explanation about the current question
         scoreEl.innerText = `Score: ${score}`
         renderExplanation(quizData[currentIndex])
         explanation.style.opacity = '1'
 
+        // Render the next question 10 seconds after the user selects an option
         throttleTimeout = setTimeout(() => {
             throttleTimeout = null
             nextQuestion()
@@ -115,7 +117,7 @@ function checkOption(selectedOption) {
     }
 }
 
-// render explanation
+// Handle updating explanation UI 
 function renderExplanation(data) {
     let optionExplanation = data.explanation
 
@@ -124,14 +126,18 @@ function renderExplanation(data) {
     }
 }
 
+// Move to the next quiz question
 function nextQuestion() {
+    // Increasing index by 1
     currentIndex++
 
+    // Check if all questions are complete, then display the finish quiz page
     if(currentIndex >= quizData.length){
         sessionStorage.setItem('score', JSON.stringify(score))
         window.location.assign('finishQuiz.html')
     }
 
+    // Clear previous question UI and updating with the next question
     explanation.innerText = ''
     explanation.style.opacity = '0'
     renderQuiz(currentIndex)
@@ -139,5 +145,4 @@ function nextQuestion() {
     nextButton.style.backgroundColor = "#499d3e";
     throttleTimeout = null
     nextButton.disabled = true
-
 }
