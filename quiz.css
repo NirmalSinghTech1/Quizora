@@ -186,7 +186,9 @@ li.incorrect {
 /* Media query */
 @media (min-width: 1024px) {
     main .quiz-container {
-        width: 70%;
+        width: 80%;
+        padding-left: 1em;
+        padding-right: 1em;
         margin: auto;
     }
 }
